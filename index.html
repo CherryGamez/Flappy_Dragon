@@ -1,29 +1,66 @@
-<!-- Home Screen -->
-<div id="homeScreen">
-  <div id="homeBox">
-    <h1>Flappy Dragon</h1>
-    <button id="playBtn">Play</button>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Flappy Dragon</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Ensures canvas scales properly */
+    #gameCanvas {
+      width: 100vw;
+      height: auto;
+      max-width: 100%;
+    }
 
-<!-- Game Container -->
-<div id="gameWrapper">
-  <canvas id="gameCanvas" width="420" height="480"></canvas>
-  <div id="livesDisplay"></div>
-  <div id="bgOverlay"></div>
-  <div id="startSign">Start the Game!</div>
-</div>
+    body {
+      overflow: hidden; /* Avoids scrollbars on phones */
+    }
 
-<!-- Game Over Modal -->
-<div id="overlay">
-  <div id="gameOverBox">
-    <div id="gameOverText">You lost a life!</div>
-    <div id="scoreBox">
-  <div id="currentScore">Score: 0</div>
-  <div id="bestOutOfThree" style="display: none;">Best out of three: 0</div>
-  <div id="bestScore">All time Best Score: 0</div>
-</div>
-    <button id="restartBtn">Play Again</button>
-    <button id="quitBtn">Home</button>
+    /* Make home screen and game over responsive */
+    #homeBox, #gameOverBox {
+      width: 90%;
+      max-width: 400px;
+    }
+
+    #startSign {
+      font-size: 6vw;
+      padding: 2vh 4vw;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Home Screen -->
+  <div id="homeScreen">
+    <div id="homeBox">
+      <h1>Flappy Dragon</h1>
+      <button id="playBtn">Play</button>
+    </div>
   </div>
-</div>
+
+  <!-- Game Container -->
+  <div id="gameWrapper">
+    <canvas id="gameCanvas" width="420" height="480"></canvas>
+    <div id="livesDisplay"></div>
+    <div id="bgOverlay"></div>
+    <div id="startSign">Start the Game!</div>
+  </div>
+
+  <!-- Game Over Modal -->
+  <div id="overlay">
+    <div id="gameOverBox">
+      <div id="gameOverText">You lost a life!</div>
+      <div id="scoreBox">
+        <div id="currentScore">Score: 0</div>
+        <div id="bestOutOfThree" style="display: none;">Best out of three: 0</div>
+        <div id="bestScore">All time Best Score: 0</div>
+      </div>
+      <button id="restartBtn">Play Again</button>
+      <button id="quitBtn">Home</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
