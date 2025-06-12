@@ -176,6 +176,12 @@ canvas.addEventListener("click", () => {
     bird.velocity = flap;
   }
 });
+canvas.addEventListener("touchstart", () => {
+  if (!gameOver) {
+    bird.velocity = flap;
+  }
+});
+
 
 playBtn.addEventListener("click", () => {
   homeScreen.style.display = "none";
