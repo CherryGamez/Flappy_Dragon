@@ -123,6 +123,7 @@ canvas {
 }
 #restartBtn:active {
   background: #f5c700;
+  transform: scale(0.95);
 }
 
 #quitBtn {
@@ -131,6 +132,7 @@ canvas {
 }
 #quitBtn:active {
   background: #d13434;
+  transform: scale(0.95);
 }
 
 #homeScreen {
@@ -167,6 +169,7 @@ canvas {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transform: scale(0.95);
 }
 #bestOutOfThree {
   font-size: 1.1rem;
