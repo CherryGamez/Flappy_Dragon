@@ -195,3 +195,19 @@ quitBtn.addEventListener("click", () => {
   homeScreen.style.display = "flex";
 });
 startSign.addEventListener("click", startGame);
+
+function createParticle() {
+  const particle = document.createElement("div");
+  particle.classList.add("particle");
+  particle.style.left = Math.random() * 100 + "vw";
+  particle.style.animationDuration = (Math.random() * 3 + 3) + "s";
+  particle.style.width = particle.style.height = Math.random() * 4 + 2 + "px";
+  document.getElementById("particles").appendChild(particle);
+
+  setTimeout(() => {
+    particle.remove();
+  }, 6000);
+}
+
+setInterval(createParticle, 300);
+
