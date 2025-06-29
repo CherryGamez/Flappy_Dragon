@@ -195,8 +195,10 @@ canvas {
   background: white;
   border-radius: 50%;
   opacity: 0.8;
-  animation: floatUp 5s linear infinite;
+  box-shadow: 0 0 8px white; /* ✨ glow effect */
+  animation: floatUp 5s linear infinite, twinkle 1s ease-in-out infinite alternate;
 }
+
 
 @keyframes floatUp {
   from {
@@ -209,4 +211,13 @@ canvas {
   }
 }
 
+@keyframes twinkle {
+  from {
+    opacity: 0.2;
+    box-shadow: 0 0 5px white;
+  }
+  to {
+    opacity: 1;
+    box-shadow: 0 0 25px white;
+  }
 }
