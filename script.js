@@ -42,7 +42,7 @@ const dragonImg = new Image();
 dragonImg.src = "https://i.postimg.cc/ryY8ZNqM/New-Sprite.png";
 
 let gravity = 0.20;
-let flap = -8;
+let flap = -6;
 let bird, pipes, score, gameOver, lives;
 let highScore = localStorage.getItem("flappyHighScore") || 0;
 
