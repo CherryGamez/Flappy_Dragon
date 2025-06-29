@@ -47,8 +47,8 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 48px;
-  color: white;
-  background: rgba(0,0,0,0.6);
+  color: #FFD700;
+  background:#2B1B17;
   padding: 12px 24px;
   border-radius: 8px;
   animation: blink 1.5s infinite;
