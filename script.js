@@ -41,15 +41,15 @@ pipeBottomImg.src = "https://i.postimg.cc/hGtt138g/Lower-pipe-Copy.png";
 const dragonImg = new Image();
 dragonImg.src = "https://i.postimg.cc/ryY8ZNqM/New-Sprite.png";
 
-let gravity = 0.4;
+let gravity = 0.25;
 let flap = -8;
 let bird, pipes, score, gameOver, lives;
 let highScore = localStorage.getItem("flappyHighScore") || 0;
 
 function drawInitialFrame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  let dragonSize = canvas.height * 0.12; // 12% of screen height
-  ctx.drawImage(dragonImg, dragonX, dragonY, dragonSize, dragonSize);
+  let dragonSize = canvas.height * 0.12;
+  ctx.drawImage(dragonImg, bird.x - dragonSize / 2, bird.y - dragonSize / 2, dragonSize, dragonSize);
 }
 
 function updateHearts() {
@@ -62,7 +62,7 @@ function resetGame(isNew = false) {
   lives = 3;
   attempts = []; // ✅ Clear old scores
 }
-  bird = { x: 50, y: 250, radius: 17.5, velocity: 0 };
+  bird = { x: 125, y: 250, radius: 17.5, velocity: 0 };
   pipes = [];
   score = 0;
   gameOver = false;
@@ -182,16 +182,19 @@ canvas.setAttribute("tabindex", "0");
 canvas.addEventListener("keydown", e => {
   if (!gameOver && (e.code === "Space" || e.code === "ArrowUp")) {
     bird.velocity = flap;
+	createStarTrail(bird.x, bird.y);
   }
 });
 canvas.addEventListener("click", () => {
   if (!gameOver) {
     bird.velocity = flap;
+    createStarTrail(bird.x, bird.y);
   }
 });
 canvas.addEventListener("touchstart", () => {
   if (!gameOver) {
     bird.velocity = flap;
+	createStarTrail(bird.x, bird.y);
   }
 });
 
@@ -234,5 +237,38 @@ function createParticle() {
 }
 
 setInterval(createParticle, 300);
+
+function createStarTrail(x, y) {
+  const particle = document.createElement("div");
+  particle.classList.add("particle");
+
+  const colorClass = Math.random() < 0.5 ? "white" : "gold";
+  particle.classList.add(colorClass);
+
+  const size = Math.random() * 8 + 4;
+  particle.style.width = size + "px";
+  particle.style.height = size + "px";
+
+  const rect = canvas.getBoundingClientRect();
+
+  // Scale canvas coordinates to screen space
+  const scaleX = rect.width / canvas.width;
+  const scaleY = rect.height / canvas.height;
+  const screenX = rect.left + x * scaleX;
+  const screenY = rect.top + y * scaleY;
+
+  particle.style.position = "fixed";
+  particle.style.left = `${screenX}px`;
+  particle.style.top = `${screenY}px`;
+  particle.style.zIndex = 999;
+
+  particle.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(45deg)`;
+  particle.style.animation = "floatUp 1.2s linear, twinkle 1s ease-in-out infinite alternate";
+
+  document.getElementById("particles").appendChild(particle);
+
+  setTimeout(() => particle.remove(), 1200);
+}
+
 
 });
