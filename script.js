@@ -41,7 +41,7 @@ pipeBottomImg.src = "https://i.postimg.cc/hGtt138g/Lower-pipe-Copy.png";
 const dragonImg = new Image();
 dragonImg.src = "https://i.postimg.cc/ryY8ZNqM/New-Sprite.png";
 
-let gravity = 0.5;
+let gravity = 0.4;
 let flap = -8;
 let bird, pipes, score, gameOver, lives;
 let highScore = localStorage.getItem("flappyHighScore") || 0;
@@ -62,7 +62,7 @@ function resetGame(isNew = false) {
   lives = 3;
   attempts = []; // ✅ Clear old scores
 }
-  bird = { x: 50, y: 150, radius: 17.5, velocity: 0 };
+  bird = { x: 50, y: 250, radius: 17.5, velocity: 0 };
   pipes = [];
   score = 0;
   gameOver = false;
