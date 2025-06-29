@@ -1,19 +1,15 @@
-body {
+html, body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100vh;
-  background: #000;
-  font-family: sans-serif;
-  position: relative;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 canvas {
-  border: 2px solid #000;
-  background: url('https://i.postimg.cc/S2MDs6KQ/41530.jpg') center/cover no-repeat;
   display: block;
+    background: url('https://i.postimg.cc/S2MDs6KQ/41530.jpg') center/cover no-repeat;
 }
+
 
 #gameWrapper {
   position: relative;
@@ -190,15 +186,32 @@ canvas {
 
 .particle {
   position: absolute;
-  width: 5px;
-  height: 5px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  box-shadow: 0 0 8px white; /* ✨ glow effect */
-  animation: floatUp 5s linear infinite, twinkle 1s ease-in-out infinite alternate;
+  width: 12px;
+  height: 12px;
+  background: none;
+  opacity: 0.9;
+  animation: floatUp 6s linear infinite, twinkle 1s ease-in-out infinite alternate;
+  transform: rotate(45deg); /* sparkle shape effect */
 }
 
+.particle.white::before,
+.particle.gold::before {
+  content: "★"; /* Unicode star */
+  font-size: 10px;
+  display: block;
+  text-align: center;
+  animation: spin 2s linear infinite;
+}
+
+.particle.white::before {
+  color: white;
+  text-shadow: 0 0 6px white;
+}
+
+.particle.gold::before {
+  color: gold;
+  text-shadow: 0 0 6px gold;
+}
 
 @keyframes floatUp {
   from {
@@ -213,11 +226,20 @@ canvas {
 
 @keyframes twinkle {
   from {
-    opacity: 0.2;
+    opacity: 0.3;
     box-shadow: 0 0 5px white;
   }
   to {
     opacity: 1;
-    box-shadow: 0 0 25px white;
+    box-shadow: 0 0 20px white;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

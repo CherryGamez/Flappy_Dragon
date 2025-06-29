@@ -1,7 +1,20 @@
-//Flappy Dragon
-let attempts = [];
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+// Flappy Dragon
+window.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let attempts = [];
+  let dragonSize = canvas.height * 0.12;
+  
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  dragonSize = canvas.height * 0.12; // update size when screen changes
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+let pipeWidth = canvas.width * 0.075; // 10% of screen width
+let pipeGap = canvas.height * 0.40; // 25% vertical space between pipes
 const homeScreen = document.getElementById("homeScreen");
 const playBtn = document.getElementById("playBtn");
 const overlay = document.getElementById("overlay");
@@ -28,16 +41,15 @@ pipeBottomImg.src = "https://i.postimg.cc/hGtt138g/Lower-pipe-Copy.png";
 const dragonImg = new Image();
 dragonImg.src = "https://i.postimg.cc/ryY8ZNqM/New-Sprite.png";
 
-let gravity = 0.3;
-let flap = -6;
-let pipeGap = 225;
-let pipeWidth = 44;
+let gravity = 0.5;
+let flap = -8;
 let bird, pipes, score, gameOver, lives;
 let highScore = localStorage.getItem("flappyHighScore") || 0;
 
 function drawInitialFrame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(dragonImg, bird.x - 35, bird.y - 35, 70, 70);
+  let dragonSize = canvas.height * 0.12; // 12% of screen height
+  ctx.drawImage(dragonImg, dragonX, dragonY, dragonSize, dragonSize);
 }
 
 function updateHearts() {
@@ -74,15 +86,16 @@ function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   bird.velocity += gravity;
   bird.y += bird.velocity;
-  ctx.drawImage(dragonImg, bird.x - 35, bird.y - 35, 70, 70);
+ let dragonSize = canvas.height * 0.12; // or tweak 0.15 if you want it bigger
+ctx.drawImage(dragonImg, bird.x - dragonSize / 2, bird.y - dragonSize / 2, dragonSize, dragonSize);
 
-  if (!pipes.length || pipes[pipes.length - 1].x < canvas.width - 150) {
+ if (!pipes.length || pipes[pipes.length - 1].x < canvas.width - 250) {
     let topH = Math.floor(Math.random() * 200) + 50;
     pipes.push({ x: canvas.width, topHeight: topH, bottomY: topH + pipeGap });
   }
 
   for (let p of pipes) {
-    p.x -= 2;
+p.x -= canvas.width * 0.0025;
     ctx.drawImage(pipeTopImg, p.x, 0, pipeWidth, p.topHeight);
     ctx.drawImage(pipeBottomImg, p.x, p.bottomY, pipeWidth, canvas.height - p.bottomY);
     if (
@@ -90,10 +103,11 @@ function update() {
       bird.x - bird.radius < p.x + pipeWidth &&
       (bird.y - bird.radius < p.topHeight || bird.y + bird.radius > p.bottomY)
     ) return endGame();
-    if (Math.floor(p.x + pipeWidth) == Math.floor(bird.x)) {
-      score++;
-      pointSound.play();
-    }
+   if (!p.scored && p.x + pipeWidth < bird.x) {
+  p.scored = true;
+  score++;
+  pointSound.play();
+}
   }
 
   if (bird.y + bird.radius > canvas.height || bird.y - bird.radius < 0) return endGame();
@@ -199,9 +213,19 @@ startSign.addEventListener("click", startGame);
 function createParticle() {
   const particle = document.createElement("div");
   particle.classList.add("particle");
+  
+  // Randomly choose color
+  const colorClass = Math.random() < 0.5 ? "white" : "gold";
+  particle.classList.add(colorClass);
+
+  // Random size
+  const size = Math.random() * 6 + 6; // 6px to 12px
+  particle.style.width = size + "px";
+  particle.style.height = size + "px";
+  
   particle.style.left = Math.random() * 100 + "vw";
   particle.style.animationDuration = (Math.random() * 3 + 3) + "s";
-  particle.style.width = particle.style.height = Math.random() * 4 + 2 + "px";
+
   document.getElementById("particles").appendChild(particle);
 
   setTimeout(() => {
@@ -211,3 +235,4 @@ function createParticle() {
 
 setInterval(createParticle, 300);
 
+});
