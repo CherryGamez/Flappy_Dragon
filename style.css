@@ -243,3 +243,48 @@ canvas {
     transform: rotate(360deg);
   }
 }
+
+.starWrapper {
+  position: fixed;
+  z-index: 999;
+  will-change: transform;
+}
+
+.starTrail {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  animation: shootBackOnly 0.6s ease-out forwards;
+  will-change: transform, opacity;
+  transform: rotate(45deg);
+}
+
+.starTrail.white::before,
+.starTrail.gold::before {
+  content: "★";
+  font-size: 10px;
+  display: block;
+  text-align: center;
+  animation: spin 2s linear infinite;
+}
+
+.starTrail.white::before {
+  color: white;
+  text-shadow: 0 0 6px white;
+}
+
+.starTrail.gold::before {
+  color: gold;
+  text-shadow: 0 0 6px gold;
+}
+
+@keyframes shootBackOnly {
+  from {
+    transform: translateX(0) scale(1) rotate(45deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-80px) scale(0.5) rotate(45deg);
+    opacity: 0;
+  }
+}

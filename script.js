@@ -41,7 +41,7 @@ pipeBottomImg.src = "https://i.postimg.cc/hGtt138g/Lower-pipe-Copy.png";
 const dragonImg = new Image();
 dragonImg.src = "https://i.postimg.cc/ryY8ZNqM/New-Sprite.png";
 
-let gravity = 0.25;
+let gravity = 0.20;
 let flap = -8;
 let bird, pipes, score, gameOver, lives;
 let highScore = localStorage.getItem("flappyHighScore") || 0;
@@ -80,12 +80,19 @@ function startGame() {
   bird.velocity = flap;
   update();
 }
-
+let starTimer = 0;
 function update() {
   if (gameOver) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   bird.velocity += gravity;
   bird.y += bird.velocity;
+  starTimer += 1;
+if (starTimer % 5 === 0) {
+  // create 2 sparkles every few frames
+  for (let i = 0; i < 2; i++) {
+    createStarTrail(bird.x, bird.y + (Math.random() * 20 - 10));
+  }
+}
  let dragonSize = canvas.height * 0.12; // or tweak 0.15 if you want it bigger
 ctx.drawImage(dragonImg, bird.x - dragonSize / 2, bird.y - dragonSize / 2, dragonSize, dragonSize);
 
@@ -182,19 +189,25 @@ canvas.setAttribute("tabindex", "0");
 canvas.addEventListener("keydown", e => {
   if (!gameOver && (e.code === "Space" || e.code === "ArrowUp")) {
     bird.velocity = flap;
-	createStarTrail(bird.x, bird.y);
+		for (let i = 0; i < 12; i++) {
+	  createStarTrail(bird.x-50, bird.y + (Math.random() * 20 - 10));
+	}
   }
 });
 canvas.addEventListener("click", () => {
   if (!gameOver) {
     bird.velocity = flap;
-    createStarTrail(bird.x, bird.y);
+		for (let i = 0; i < 12; i++) {
+	  createStarTrail(bird.x-50, bird.y + (Math.random() * 20 - 10)); // slight vertical jitter
+	}
   }
 });
 canvas.addEventListener("touchstart", () => {
   if (!gameOver) {
     bird.velocity = flap;
-	createStarTrail(bird.x, bird.y);
+		for (let i = 0; i < 12; i++) {
+	  createStarTrail(bird.x-50, bird.y + (Math.random() * 20 - 10));
+	}
   }
 });
 
@@ -239,36 +252,36 @@ function createParticle() {
 setInterval(createParticle, 300);
 
 function createStarTrail(x, y) {
-  const particle = document.createElement("div");
-  particle.classList.add("particle");
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("starWrapper");
 
+  const star = document.createElement("div");
+  star.classList.add("starTrail");
   const colorClass = Math.random() < 0.5 ? "white" : "gold";
-  particle.classList.add(colorClass);
+  star.classList.add(colorClass);
 
-  const size = Math.random() * 8 + 4;
-  particle.style.width = size + "px";
-  particle.style.height = size + "px";
+  const size = Math.random() * 12 + 4;
+  star.style.width = size + "px";
+  star.style.height = size + "px";
 
   const rect = canvas.getBoundingClientRect();
-
-  // Scale canvas coordinates to screen space
   const scaleX = rect.width / canvas.width;
   const scaleY = rect.height / canvas.height;
   const screenX = rect.left + x * scaleX;
   const screenY = rect.top + y * scaleY;
+  const jitterY = Math.random() * 20 - 10;
 
-  particle.style.position = "fixed";
-  particle.style.left = `${screenX}px`;
-  particle.style.top = `${screenY}px`;
-  particle.style.zIndex = 999;
+  wrapper.style.left = `${screenX}px`;
+  wrapper.style.top = `${screenY}px`;
+  wrapper.style.transform = `translateY(${jitterY}px)`;
 
-  particle.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) rotate(45deg)`;
-  particle.style.animation = "floatUp 1.2s linear, twinkle 1s ease-in-out infinite alternate";
+  wrapper.appendChild(star);
+  document.getElementById("starTrail").appendChild(wrapper);
 
-  document.getElementById("particles").appendChild(particle);
-
-  setTimeout(() => particle.remove(), 1200);
+  setTimeout(() => wrapper.remove(), 800);
 }
+
+
 
 
 });
