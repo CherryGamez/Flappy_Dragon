@@ -288,3 +288,53 @@ canvas {
     opacity: 0;
   }
 }
+
+#tutorialOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#tutorialBox {
+  background: #222;
+  padding: 30px 40px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 15px #000;
+}
+
+#tutorialBox h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#tutorialBox ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+#tutorialBox li {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+#startTutorialBtn {
+  padding: 12px 20px;
+  font-size: 16px;
+  background: #ffd700;
+  allign: center
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
