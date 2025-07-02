@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,7 @@
   <div id="homeScreen">
     <div id="homeBox">
       <h1>Flappy Dragon</h1>
-      <button id="playBtn">Play</button>
+      <button id="playBtn">Spielen!</button>
     </div>
   </div>
 
@@ -20,19 +20,19 @@
     <canvas id="gameCanvas" width="420" height="480"></canvas>
     <div id="livesDisplay"></div>
     <div id="bgOverlay"></div>
-    <div id="startSign">Click to Play!</div>
+    <div id="startSign">Zum Starten klicken!</div>
   </div>
 
   <!-- Game Over Modal -->
   <div id="overlay">
     <div id="gameOverBox">
-      <div id="gameOverText">You lost a life!</div>
+      <div id="gameOverText">Du hast ein Leben verloren!</div>
       <div id="scoreBox">
-        <div id="currentScore">Score: 0</div>
-        <div id="bestOutOfThree" style="display: none;">Best out of three: 0</div>
-        <div id="bestScore">All time Best Score: 0</div>
+        <div id="currentScore">Punkte: 0</div>
+        <div id="bestOutOfThree" style="display: none;">Bestes von drei: 0</div>
+        <div id="bestScore">Allzeit-Bestpunktzahl: 0</div>
       </div>
-      <button id="restartBtn">Play Again</button>
+      <button id="restartBtn">Erneut Spielen!</button>
       <button id="quitBtn">Home</button>
     </div>
   </div>
@@ -45,13 +45,14 @@
   <div id="tutorialOverlay">
   <div id="tutorialBox">
   
-    <h2> 🐉How to Play!🐉</h2>
+    <h2> 🐉Flappy Dragon Tutorial!🐉</h2>
     <ul>
-      <li>🖱️ Tap / Click / Press Space to make the dragon flap.</li>
-      <li>🪵 Avoid hitting the pipes,touching the upper border or falling down!</li>
-      <li>🏆 Gain 1 point for every pipe passed.</li>
+      <li>🖱️ Tippen, klicken oder Leertaste – der Drache flattert!</li>
+      <li>🪵 Weiche den Röhren aus, berühre nicht den Rand und stürze nicht ab!</li>
+      <li>🏆 1 Punkt pro geschaffter Röhre!</li>
+	  <li>🎮 Viel Spaß beim spielen! 🎮</li>
     </ul>
-    <button id="startTutorialBtn">Start Playing</button>
+    <button id="startTutorialBtn">Spiel starten!</button>
   </div>
 </div>
 

@@ -166,7 +166,7 @@ window.addEventListener("DOMContentLoaded", () => {
         ctx.fillStyle = "black";
         ctx.font = "20px sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText(`Score: ${score}`, boxX + boxW / 2, boxY + 26);
+        ctx.fillText(`Punkte: ${score}`, boxX + boxW / 2, boxY + 26);
 
         requestAnimationFrame(update);
     }
@@ -186,22 +186,24 @@ window.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("flappyHighScore", highScore);
         }
 
-        scoreText.innerText = `Score: ${score}`;
+        scoreText.innerText = `Punkte: ${score}`;
         bestText.innerText = isNewHigh
-             ? `All time Best Score: ${highScore} 🏆`
-             : `All time Best Score: ${highScore}`;
+            ? `Allzeit-Bestpunktzahl: ${highScore} 🏆`
+            : `Allzeit-Bestpunktzahl: ${highScore}`;
+
 
         if (lives === 0) {
             document.getElementById("gameOverText").innerText = "Game Over!";
-            restartBtn.innerText = "Restart Game";
+            restartBtn.innerText = " Neu starten!";
 
             // ✅ Show Best out of three
             const bestOfThree = Math.max(...attempts);
-            document.getElementById("bestOutOfThree").innerText = `Best out of three: ${bestOfThree}`;
+            document.getElementById("bestOutOfThree").innerText = `Bestes von drei: ${bestOfThree}`;
             document.getElementById("bestOutOfThree").style.display = "block";
         } else {
-            document.getElementById("gameOverText").innerText = "You lost a life!";
-            restartBtn.innerText = `Play Again (${lives})`;
+           document.getElementById("gameOverText").innerText = "Du hast ein Leben verloren!";
+		   restartBtn.innerText = `Erneut spielen (${lives})`;
+
 
             // ✅ Hide during non-final rounds
             document.getElementById("bestOutOfThree").style.display = "none";
