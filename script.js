@@ -125,7 +125,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         for (let p of pipes) {
-            p.x -= canvas.width * 0.0025;
+            p.x -= canvas.width * 0.003;
             ctx.drawImage(pipeTopImg, p.x, 0, pipeWidth, p.topHeight);
             ctx.drawImage(pipeBottomImg, p.x, p.bottomY, pipeWidth, canvas.height - p.bottomY);
             if (
