@@ -125,7 +125,11 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         for (let p of pipes) {
-            p.x -= canvas.width * 0.003;
+            let baseSpeed = 0.003;
+			let extraSpeed = Math.floor(score / 5) * 0.00015;
+			let pipeSpeed = baseSpeed + extraSpeed;
+			p.x -= canvas.width * pipeSpeed;
+
             ctx.drawImage(pipeTopImg, p.x, 0, pipeWidth, p.topHeight);
             ctx.drawImage(pipeBottomImg, p.x, p.bottomY, pipeWidth, canvas.height - p.bottomY);
             if (
